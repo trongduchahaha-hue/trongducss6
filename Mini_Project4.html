@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        
+    </h1>
+    <script>
+        let count = 0
+        while (count < 3) {
+            let account = prompt("Nhập tài khoản");
+            let password = prompt("Nhập mật khẩu");
+            if (account === "admin" && password === "12345") {
+                alert("Đăng nhập thành công");
+                break;
+            } else {
+                console.log(`Sai mật khẩu lần thứ ${count + 1}`);
+                count++;
+            }
+        }
+        if (count === 3) {
+            console.log("Hệ thống bị khóa");
+        } else {
+            let libraries = ["Toán", "Văn", "Anh"];
+            let choice;
+            do {
+                choice = +prompt(`
+                1. Nhập thêm lô sách mới
+                2. Hiển thị danh sách sách
+                3. Tìm kiếm sách
+                4. Cập nhật tên sách
+                5. Đảo ngược thứ tự kệ sách
+                6. Nhập kho từ nguồn khác
+                7. Thoát chương trình
+                Vui lòng nhập lựa chọn của bạn ( 1-7 ):
+                `);
+                switch (choice) {
+                    case 1:
+                        let bookInput = prompt("Nhập các tên sách, phân cách bởi dấu phẩy (Ví dụ: Sử, Địa, Lý):");
+                        if (bookInput) {
+                            let newLibraries = bookInput.split(",");
+                            for (let book of newLibraries) {
+                                libraries.push(book.trim());
+                            }
+                            console.log("Đã thêm " + newLibraries.length + " cuốn sách vào kho.");
+                        }
+                        break;
+                    case 2:
+                        console.log("--- DANH SÁCH SÁCH HIỆN CÓ ---");
+                        for (let i = 0; i < libraries.length; i++) {
+                            console.log(`${i + 1}. ${libraries[i]}`);
+                        }
+                        break;
+                    case 3:
+                        let searchName = prompt("Nhập tên sách cần tìm:");
+                        let index = libraries.indexOf(searchName);
+                        if (index !== -1) {
+                            console.log(`Sách [${searchName}] được tìm thấy tại vị trí index: ${index}`);
+                        } else {
+                            console.log("Không tìm thấy");
+                        }
+                        break;
+                    case 4:
+                        let oldName = prompt("Nhập tên sách cần sửa:");
+                        let updateIndex = libraries.indexOf(oldName);
+                        if (updateIndex !== -1) {
+                            let newName = prompt("Nhập tên mới:");
+                            libraries[updateIndex] = newName;
+                            console.log("Cập nhật thành công!");
+                        } else {
+                            console.log("Lỗi: Sách không tồn tại.");
+                        }
+                        break;
+                    case 5:
+                        libraries.reverse();
+                        console.log("--- DANH SÁCH SAU KHI ĐẢO NGƯỢC ---");
+                        for (let i in libraries) {
+                            console.log(`Index ${i}: ${libraries[i]}`);
+                        }
+                        break;
+                    case 6:
+                        let otherBranch = ["Sách Kỹ Năng", "Truyện Tranh"];
+                        libraries = libraries.concat(otherBranch);
+                        console.log("Đã gộp kho sách thành công.");
+                        break;
+                    case 7:
+                        alert("Hẹn gặp lại");
+                        break;
+
+                    default:
+                        console.log("Lựa chọn không hợp lệ");
+
+                        break;
+                }
+            } while (choice !== 7)
+        }
+
+    </script>
+
+</body>
+
+</html>
